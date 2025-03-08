@@ -1,0 +1,8 @@
+:root{
+    --black: #313131;
+    --white: #fff;
+}
+
+.app-bar{
+    padding: 0 !important;
+}
