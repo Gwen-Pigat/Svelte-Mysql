@@ -29,7 +29,7 @@ export const init:any = async() => {
         ct: "pages",
     }
     const [navbar]: any[] = await pool.query(
-        "SELECT name,url_rewrite FROM pages WHERE is_active = 1 AND url_rewrite is not null"
+        "SELECT id,name,url_rewrite FROM pages WHERE is_active = 1 AND url_rewrite is not null"
     )
     if(navbar.length <= 0){
         return result

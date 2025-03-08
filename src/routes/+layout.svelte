@@ -1,34 +1,30 @@
 <script lang="ts">
-	import '../app.postcss';
+	import Navbar from '$lib/components/Navbar.svelte';
+    import '../app.postcss';
 
-    import { AppBar } from '@skeletonlabs/skeleton'
+    import { initializeStores, Toast } from '@skeletonlabs/skeleton';
+
+    initializeStores()
 
     export let data
 
-    function makeLink(name:string):string
-    {
-        return "/"+data["lang"]+"/"+data["ct"]+"/"+name
-    }
+    $: items = data["navbar"]
+    $: lang = data["lang"]
+    $: ct = data["ct"]
 
 </script>
-
-<AppBar>
-	<svelte:fragment slot="lead">
-        <img src="/logo.svg" alt="logo" />
-    </svelte:fragment>
-    <svelte:fragment slot="trail">
-    {#if data["navbar"].length > 0}
-        {#each data["navbar"] as item}
-            <a href="{makeLink(item['url_rewrite'])}">{item["name"]}</a>
-        {/each}
-    {/if}
-    </svelte:fragment>
-</AppBar>
-
-<slot />
+<Navbar {items} {lang} {ct} />
+<main>
+    <Toast />
+    <slot />
+</main>
 
 <style>
-    img{
-        width: 250px;
+    main{
+        padding: 1rem;
+        display: flex;
+        margin: auto;
+        justify-items: center;
+        flex-direction: column;
     }
 </style>
